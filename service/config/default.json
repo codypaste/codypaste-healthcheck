@@ -1,7 +1,8 @@
 {
   "jobsConfig": {
     "snippetsServiceHealthcheck": {
-      "snippetsServiceBaseUrl": "https://api.codypaste.io"
+      "snippetsUrl": "https://api.codypaste.io/snippets",
+      "groupsUrl": "https://api.codypaste.io/groups"
     }
   }
 }
