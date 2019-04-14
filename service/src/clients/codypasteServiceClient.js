@@ -1,7 +1,11 @@
 'use strict';
 const rp = require('request-promise');
 
-const codypasteServiceClient = ({snippetsUrl, groupsUrl}) => {
+const codypasteServiceClient = ({
+    snippetsUrl, 
+    groupsUrl,
+    groupsSearchUrl
+}) => {
     const postRequest = async (uri, payload, overrides) => {
         const options = Object.assign({},
             {
@@ -17,12 +21,14 @@ const codypasteServiceClient = ({snippetsUrl, groupsUrl}) => {
         return rp(options);
     }
     
-    const postGroup = async payload => postRequest(groupsUrl, payload);
-    const postSnippet = async payload => postRequest(snippetsUrl, payload);
+    const createGroup = async payload => postRequest(groupsUrl, payload);
+    const createSnippet = async payload => postRequest(snippetsUrl, payload);
+    const searchGroup = async payload => postRequest(groupsSearchUrl, payload);
 
     return {
-        postGroup,
-        postSnippet
+        createGroup,
+        createSnippet,
+        searchGroup
     }
 
 };

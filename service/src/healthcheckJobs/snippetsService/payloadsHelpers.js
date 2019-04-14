@@ -1,11 +1,11 @@
 const cryptoRandomString = require('crypto-random-string');
  
-const postGroupPayload = (title = cryptoRandomString(10)) => ({
+const groupCreatePayload = (title = cryptoRandomString(10)) => ({
     title,
     expirationDatetime: null
 });
 
-const postSnippetPayload  = groupID => ({
+const snippetCreatePayload = groupID => ({
     snippet: cryptoRandomString(40),
     group: groupID,
     author: 'Healthcheck service',
@@ -13,7 +13,10 @@ const postSnippetPayload  = groupID => ({
     syntax: 'Plain Text',
 });
 
+const groupSearchPayload = id => ({ groupId: id });
+
 module.exports = {
-    postGroupPayload,
-    postSnippetPayload
+    groupCreatePayload,
+    snippetCreatePayload,
+    groupSearchPayload
 };

@@ -3,13 +3,15 @@ const config = require('config');
 const snippetsServiceClient = require('../../clients/codypasteServiceClient');
 
 const {
-  postGroupPayload,
-  postSnippetPayload
+  groupCreatePayload,
+  snippetCreatePayload,
+  groupSearchPayload
 } = require('./payloadsHelpers');
 
 const snippetsServiceOperations = {
   CREATE_GROUP: 'CREATE_GROUP',
-  CREATE_SNIPPET: 'CREATE_SNIPPET'
+  CREATE_SNIPPET: 'CREATE_SNIPPET',
+  SEARCH_GROUP: 'SEARCH_GROUP'
 }
 const snippetsServiceHealthcheck = (statusGatherer) => {
   const client = snippetsServiceClient(config.get('jobsConfig.snippetsServiceHealthcheck'));
@@ -36,12 +38,16 @@ const snippetsServiceHealthcheck = (statusGatherer) => {
     const jobStart = new Date();
 
     // Group creation checkup
-    const groupPayload = postGroupPayload();
-    const {id} = await performCheckup(snippetsServiceOperations.CREATE_GROUP, groupPayload, client.postGroup);
+    const groupPayload = groupCreatePayload();
+    const {id} = await performCheckup(snippetsServiceOperations.CREATE_GROUP, groupPayload, client.createGroup);
     
     // Snippet creation checkup
-    const snippetPayload = postSnippetPayload(id);
-    await performCheckup(snippetsServiceOperations.CREATE_SNIPPET, snippetPayload, client.postSnippet);
+    const snippetPayload = snippetCreatePayload(id);
+    await performCheckup(snippetsServiceOperations.CREATE_SNIPPET, snippetPayload, client.createSnippet);
+    
+    // Group search checkup
+    const searchPayload = groupSearchPayload(id);
+    await performCheckup(snippetsServiceOperations.SEARCH_GROUP, searchPayload, client.searchGroup);
 
     const jobDuration = new Date() - jobStart;
     logger.info(`Snippets Service healthcheck job execution time ${jobDuration} ms`);
