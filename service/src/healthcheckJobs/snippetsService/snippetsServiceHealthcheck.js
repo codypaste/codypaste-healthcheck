@@ -54,6 +54,8 @@ const snippetsServiceHealthcheck = (statusGatherer) => {
     statusGatherer.saveJobExecutionTime(jobDuration);
 
     await statusGatherer.saveResults(jobDuration);
+
+    return statusGatherer;
   }
 
   return {

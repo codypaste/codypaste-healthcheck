@@ -1,11 +1,8 @@
 'use strict';
 const jobsEnum = require('./jobsEnum');
 const snippetsServiceHealthcheck = require('./snippetsService/snippetsServiceHealthcheck');
-const healthchecksStatusesGatherer = require('./healthchecksStatusesGatherer');
 
-const healthcheckJobsFactory = () => {
-  const statusesGatherer = healthchecksStatusesGatherer(); 
-
+const healthcheckJobsFactory = (statusesGatherer) => {
   const initializeHealthcheckProcess = jobName => {
     switch (jobName) {
       case jobsEnum.SNIPPETS_SERVICE_HEALTHCHECK:

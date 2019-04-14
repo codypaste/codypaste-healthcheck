@@ -3,6 +3,10 @@ const moment = require('moment');
 const logger = require('../utils/logger');
 
 const healthchecksStatusesGatherer = () => {
+    const allJobsResults = [];
+    const gatherJobResult = jobResult => allJobsResults.push(jobResult);
+    const getAllJobsResults = () => allJobsResults;
+
     const prepareTemplate = jobName => ({
         jobStartDatetime: moment().utc(),
         jobName,
@@ -13,10 +17,11 @@ const healthchecksStatusesGatherer = () => {
     
     const initializeForJob = (jobName) => {
         logger.info(`Initialized status gatherer for ${jobName}`);
-        const operationsGathered = prepareTemplate(jobName);
+        const operationsResultsGathered = prepareTemplate(jobName);
         
+        const getJobResultsGathered = () => operationsResultsGathered;
         const collectOperationResults = ({operationName, payload, response, executionTime}) => {
-            const { operationsPerformed } = operationsGathered;
+            const { operationsPerformed } = operationsResultsGathered;
             operationsPerformed.push({
                 operationDatetime: moment().utc(),
                 operationName, 
@@ -26,25 +31,30 @@ const healthchecksStatusesGatherer = () => {
             });
         };
         const collectError = ({operationName, e}) => {
-            const { errorsEncountered } = operationsGathered;
+            const { errorsEncountered } = operationsResultsGathered;
             errorsEncountered.push({operationName, e});
         }
-        const saveJobExecutionTime = execTime => operationsGathered.executionTime = execTime;
+        const saveJobExecutionTime = execTime => operationsResultsGathered.executionTime = execTime;
         const saveResults = async () => {
             // TODO: Store gathered results in database
-            console.log(JSON.stringify(operationsGathered, null, 2));
+            console.log(JSON.stringify(operationsResultsGathered, null, 2));
+            gatherJobResult(operationsResultsGathered);
         }
-
+        
         return {
             collectOperationResults,
             collectError,
             saveJobExecutionTime,
-            saveResults
+            saveResults,
+            getJobResultsGathered
         }
     };
 
     return {
-        initializeForJob
+        initializeForJob,
+
+        gatherJobResult,
+        getAllJobsResults
     }
 };
 
