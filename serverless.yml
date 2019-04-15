@@ -1,0 +1,20 @@
+service: codypaste-healthcheck
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'eu-central-1'}
+  package:
+    excludeDevDependencies: true
+    exclude:
+      - .git/**
+
+functions:
+  codypasteHealthcheck:
+    handler: index.codypasteHealthcheck
+    events:
+      - http:
+          path: /
+          method: get
+      - schedule: rate(5 hours)

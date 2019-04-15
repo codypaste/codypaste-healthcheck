@@ -1,0 +1,6 @@
+{
+    "emailReporter": {
+        "username": "EMAIL_REPORTER_USERNAME",
+        "password": "EMAIL_REPORTER_PASSWORD"
+    }
+}

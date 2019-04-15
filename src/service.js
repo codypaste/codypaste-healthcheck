@@ -14,6 +14,8 @@ const healthcheckService = () => {
     await hcJobRunner.runJobs();
 
     await emailReporter(statusesGatherer).sendReport();
+
+    return statusesGatherer.getAllJobsResults();
   }; 
 
   return {

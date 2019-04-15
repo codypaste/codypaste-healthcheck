@@ -1,8 +1,0 @@
-service/test/
-service/logs/*
-service/node_modules/
-
-service/.eslintignore
-service/.eslintrc.json
-service/.prettierrc
-service/package-lock.json
