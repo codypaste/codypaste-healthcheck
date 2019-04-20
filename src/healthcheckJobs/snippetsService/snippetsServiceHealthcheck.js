@@ -11,7 +11,8 @@ const {
 const snippetsServiceOperations = {
   CREATE_GROUP: 'CREATE_GROUP',
   CREATE_SNIPPET: 'CREATE_SNIPPET',
-  SEARCH_GROUP: 'SEARCH_GROUP'
+  SEARCH_GROUP: 'SEARCH_GROUP',
+  DELETE_GROUP: 'DELETE_GROUP'
 }
 const snippetsServiceHealthcheck = (statusGatherer) => {
   const client = snippetsServiceClient(config.get('jobsConfig.snippetsServiceHealthcheck'));
@@ -48,6 +49,9 @@ const snippetsServiceHealthcheck = (statusGatherer) => {
     // Group search checkup
     const searchPayload = groupSearchPayload(id);
     await performCheckup(snippetsServiceOperations.SEARCH_GROUP, searchPayload, client.searchGroup);
+
+    // Group and snippets delete checkup
+    await performCheckup(snippetsServiceOperations.DELETE_GROUP, id, client.deleteGroupWithSnippets);
 
     const jobDuration = new Date() - jobStart;
     logger.info(`Snippets Service healthcheck job execution time ${jobDuration} ms`);

@@ -1,9 +1,9 @@
 {
-    "jobsConfig": {
-        "snippetsServiceHealthcheck": {
-            "snippetsUrl": "https://api.codypaste.io/snippets",
-            "groupsUrl": "https://api.codypaste.io/groups",
-            "groupsSearchUrl": "https://api.codypaste.io/groups/_search"
-        }
+  "jobsConfig": {
+    "snippetsServiceHealthcheck": {
+      "snippetsUrl": "https://api.codypaste.io/snippets",
+      "groupsUrl": "https://api.codypaste.io/groups",
+      "groupsSearchUrl": "https://api.codypaste.io/groups/_search"
     }
+  }
 }

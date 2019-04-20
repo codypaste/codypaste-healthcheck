@@ -2,7 +2,7 @@
 const healthcheckService = require('./src/service');
 const logger = require('./src/utils/logger');
 
-module.exports.codypasteHealthcheck = async () => {
+const codypasteHealthcheck = async () => {
   try {
     const hcResults = await healthcheckService().start();
     return {
@@ -17,3 +17,7 @@ module.exports.codypasteHealthcheck = async () => {
     }
   }
 };
+
+codypasteHealthcheck();
+
+module.exports.healthcheckService;
