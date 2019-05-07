@@ -4,7 +4,7 @@ provider:
   name: aws
   runtime: nodejs8.10
   stage: ${opt:stage, 'dev'}
-  region: ${opt:region, 'eu-central-1'}
+  region: ${opt:region, 'us-east-1'}
   package:
     excludeDevDependencies: true
     exclude:
@@ -17,4 +17,4 @@ functions:
       - http:
           path: /
           method: get
-      - schedule: rate(5 hours)
+      # - schedule: rate(5 hours)

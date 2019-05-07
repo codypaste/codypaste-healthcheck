@@ -26,9 +26,8 @@ const snippetsServiceHealthcheck = (statusGatherer) => {
       response = await handler(payload);
       const executionTime = new Date() - operationStart;
       statusGatherer.collectOperationResults({ operationName, payload, response, executionTime});
-    } catch (e) {
-      statusGatherer.collectOperationResults({ operationName, e});
-      throw e;
+    } catch (error) {
+      statusGatherer.collectOperationResults({ operationName, payload, response, error});
     }
 
     return response;

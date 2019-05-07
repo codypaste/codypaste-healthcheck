@@ -20,7 +20,7 @@ const healthchecksStatusesGatherer = () => {
         const operationsResultsGathered = prepareTemplate(jobName);
         
         const getJobResultsGathered = () => operationsResultsGathered;
-        const collectOperationResults = ({operationName, payload, response, executionTime}) => {
+        const collectOperationResults = ({operationName, payload, response, executionTime, error}) => {
             const { operationsPerformed } = operationsResultsGathered;
             operationsPerformed.push({
                 operationDatetime: moment().utc(),
@@ -29,10 +29,14 @@ const healthchecksStatusesGatherer = () => {
                 response, 
                 executionTime
             });
+
+            if(error) {
+                collectError(operationName, error);
+            }
         };
-        const collectError = ({operationName, e}) => {
+        const collectError = (operationName, error) => {
             const { errorsEncountered } = operationsResultsGathered;
-            errorsEncountered.push({operationName, e});
+            errorsEncountered.push({operationName, error});
         }
         const saveJobExecutionTime = execTime => operationsResultsGathered.executionTime = execTime;
         const saveResults = async () => {
