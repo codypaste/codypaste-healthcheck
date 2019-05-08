@@ -5,5 +5,13 @@
       "groupsUrl": "https://api.codypaste.io/groups",
       "groupsSearchUrl": "https://api.codypaste.io/groups/_search"
     }
+  },
+  "jobsStatusesReporter": {
+    "mailerCredentials": {
+      "user": "",
+      "pass": ""
+    },
+    "reportsAddressees": "szopqa96@gmail.com",
+    "notifyOnlyOnErrors": "false"
   }
 }

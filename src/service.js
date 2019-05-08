@@ -8,12 +8,14 @@ const logger = require('./utils/logger');
 const healthcheckService = () => {
   const start = async () => {
     const statusesGatherer = healthchecksStatusesGatherer(); 
+    const mailer = emailReporter();
     
     logger.info(`Starting healthcheck jobs...`);
     const hcJobRunner = healthchecksRunner(healthcheckJobsFactory(statusesGatherer));
+    
     await hcJobRunner.runJobs();
 
-    await emailReporter(statusesGatherer).sendReport();
+    await mailer.sendReport(statusesGatherer);
 
     return statusesGatherer.getAllJobsResults();
   }; 

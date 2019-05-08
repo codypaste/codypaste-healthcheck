@@ -1,6 +1,10 @@
 {
-    "emailReporter": {
-        "username": "EMAIL_REPORTER_USERNAME",
-        "password": "EMAIL_REPORTER_PASSWORD"
-    }
+  "jobsStatusesReporter": {
+    "mailerCredentials": {
+      "user": "MAILER_USER",
+      "pass": "MAILER_PASS"
+    },
+    "reportsAddressees": "REPORTS_ADDRESSEES",
+    "notifyOnlyOnErrors": "NOTIFY_ONLY_ON_ERRORS"
+  }
 }

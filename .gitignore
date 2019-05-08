@@ -10,6 +10,9 @@ yarn.lock
 # Serverless directories
 .serverless
 
+# script used to test function locally
+run.sh
+
 # Runtime data
 pids
 *.pid

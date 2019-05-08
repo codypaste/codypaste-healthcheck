@@ -1,36 +1,26 @@
 'use strict';
+const config = require('config');
 const nodemailer = require("nodemailer");
 
-/*
-    Example implementation based on https://nodemailer.com/about/#example
-*/
-const emailReporter = (healthchecksStatusesGatherer) => {
-    const jobResults = healthchecksStatusesGatherer.getAllJobsResults();
+const mailerConfig = config.get('jobsStatusesReporter');
 
-    const initializeMailer = async () => {
-        const testAccount = await nodemailer.createTestAccount();
-
-        return nodemailer.createTransport({
-            host: "smtp.ethereal.email",
-            port: 587,
-            secure: false,
-            auth: {
-                user: testAccount.user,
-                pass: testAccount.pass
-            }
-        });
-    }
+const emailReporter = () => {
+    const mailerClient = nodemailer.createTransport({
+        service: 'gmail',
+        auth: mailerConfig.mailerCredentials
+    });
     
-    const sendReport = async () => {
-        const mailClient = await initializeMailer();
+    const buildReport = (subject, message) => ({
+        from: 'Codypaste Healthcheck',
+        to: mailerConfig.reportsAddressees,
+        subject,
+        text: message
+    });
 
-        await mailClient.sendMail({
-            from: '"Fred Foo 👻" <foo@example.com>',
-            to: "bar@example.com, baz@example.com",
-            subject: "Hello ✔",
-            text: "Hello world?",
-            html: "<b>Hello world?</b>"
-        });
+    const sendReport = async (healthchecksStatusesGatherer) => {
+        const jobResults = healthchecksStatusesGatherer.getAllJobsResults();
+        const jobsInfo = mailerConfig.notifyOnlyOnErrors === "true" ? jobResults.filter(jr => jr.errorsEncountered.length !== 0) : jobResults;
+        return mailerClient.sendMail(buildReport('Test', JSON.stringify(jobsInfo)));
     };
 
     return {

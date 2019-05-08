@@ -1,0 +1,9 @@
+{
+  "jobsConfig": {
+    "snippetsServiceHealthcheck": {
+      "snippetsUrl": "http://localhost/snippets",
+      "groupsUrl": "http://localhost/groups",
+      "groupsSearchUrl": "http://localhost/groups/_search"
+    }
+  }
+}

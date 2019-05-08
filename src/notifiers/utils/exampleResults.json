@@ -1,0 +1,91 @@
+[
+  {
+    "jobStartDatetime": "2019-05-08T21:41:28.984Z",
+    "jobName": "SNIPPETS_SERVICE_HEALTHCHECK",
+    "operationsPerformed": [
+      {
+        "operationDatetime": "2019-05-08T21:41:30.223Z",
+        "operationName": "CREATE_GROUP",
+        "payload": {
+          "title": "c83f57d097",
+          "expirationDatetime": null
+        },
+        "response": {
+          "author": "unknown",
+          "updatedAt": "2019-05-08T21:41:30.020Z",
+          "isEncrypted": false,
+          "description": null,
+          "isPublic": true,
+          "id": "cjvfqzinz00090799bbvftahm",
+          "createdAt": "2019-05-08T21:41:30.020Z",
+          "isProtected": false,
+          "title": "c83f57d097",
+          "expirationDatetime": null
+        },
+        "executionTime": 1237
+      },
+      {
+        "operationDatetime": "2019-05-08T21:41:30.416Z",
+        "operationName": "CREATE_SNIPPET",
+        "payload": {
+          "snippet": "9e84a9099b67507f5d5479c5b38202696eed323e",
+          "group": "cjvfqzinz00090799bbvftahm",
+          "author": "Healthcheck service",
+          "snippetName": "Healthcheck service test snippet",
+          "syntax": "Plain Text"
+        },
+        "response": {
+          "author": "Healthcheck service",
+          "updatedAt": "2019-05-08T21:41:30.298Z",
+          "snippetName": "Healthcheck service test snippet",
+          "syntax": "Plain Text",
+          "id": "cjvfqziv5000g0799nji6nyjm",
+          "createdAt": "2019-05-08T21:41:30.298Z"
+        },
+        "executionTime": 192
+      },
+      {
+        "operationDatetime": "2019-05-08T21:41:30.575Z",
+        "operationName": "SEARCH_GROUP",
+        "payload": {
+          "groupId": "cjvfqzinz00090799bbvftahm"
+        },
+        "response": {
+          "group": {
+            "author": "unknown",
+            "updatedAt": "2019-05-08T21:41:30.020Z",
+            "isEncrypted": false,
+            "description": null,
+            "isPublic": true,
+            "id": "cjvfqzinz00090799bbvftahm",
+            "createdAt": "2019-05-08T21:41:30.020Z",
+            "isProtected": false,
+            "title": "c83f57d097",
+            "expirationDatetime": null
+          },
+          "snippets": [
+            {
+              "author": "Healthcheck service",
+              "updatedAt": "2019-05-08T21:41:30.298Z",
+              "snippetName": "Healthcheck service test snippet",
+              "syntax": "Plain Text",
+              "id": "cjvfqziv5000g0799nji6nyjm",
+              "createdAt": "2019-05-08T21:41:30.298Z",
+              "snippet": "9e84a9099b67507f5d5479c5b38202696eed323e"
+            }
+          ]
+        },
+        "executionTime": 159
+      },
+      {
+        "operationDatetime": "2019-05-08T21:41:30.843Z",
+        "operationName": "DELETE_GROUP",
+        "payload": "cjvfqzinz00090799bbvftahm",
+        "response": "",
+        "executionTime": 268
+      }
+    ],
+    "executionTime": 1857,
+    "errorsEncountered": []
+  }
+]
